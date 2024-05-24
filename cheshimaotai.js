@@ -80,9 +80,9 @@ const nowDate = parseInt((new Date().getTime() / 1000).toString());  // 当前�
 const zeroDate = (nowDate - (nowDate % 86400) - 3600 * 8) * 1000;  // 今日零点时间戳
 let productInfo = [], message = '', CookieArr = [], Cookie = '', DeviceID = '';
 
-let MT_PROVINCE="海南省";
-let MT_CITY="三亚市";
-let MT_DISTRICT="海棠区";
+var address = $.getdata('imaotai__config__address') || '' // 详细地址
+var location = $.getdata('imaotai__config__location') || '' // 地址经纬度
+var shopid = $.getdata('imaotai__config__shopid') || '' // 商铺id
 let MT_ITEM_BLACK='2478|10056|10923';
 let MT_TOKENS = $.getdata('MT_TOKENS') || '';
 let MT_VERSION = $.getdata('MT_VERSION') || '1.4.9';
