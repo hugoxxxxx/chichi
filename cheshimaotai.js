@@ -80,10 +80,10 @@ const nowDate = parseInt((new Date().getTime() / 1000).toString());  // 当前�
 const zeroDate = (nowDate - (nowDate % 86400) - 3600 * 8) * 1000;  // 今日零点时间戳
 let productInfo = [], message = '', CookieArr = [], Cookie = '', DeviceID = '';
 
-let MT_PROVINCE = $.getdata('海南省') || '广东省';
-let MT_CITY = $.getdata('三亚市') || '广州市';
-let MT_DISTRICT = $.getdata('海棠区') || '';
-let MT_ITEM_BLACK = $.getdata('2478|10056|10923') || '2478|10056';
+let MT_PROVINCE="海南省";
+let MT_CITY="三亚市";
+let MT_DISTRICT="海棠区";
+let MT_ITEM_BLACK='2478|10056|10923';
 let MT_TOKENS = $.getdata('MT_TOKENS') || '';
 let MT_VERSION = $.getdata('MT_VERSION') || '1.4.9';
 let MT_USERAGENT = $.getdata('MT_USERAGENT') || 'iOS;16.1.2;Apple;?unrecognized?';
