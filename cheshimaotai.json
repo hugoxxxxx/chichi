@@ -1,0 +1,59 @@
+{
+  "id": "hugo",
+  "name": "hugo 脚本合集",
+  "description": "",
+  "author": "hugo",
+  "icon": "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Disney+.png",
+  "repo": "https://github.com/hugoxxxxx/Script",
+  "apps": [
+        {
+      "id": "iMaoTai",
+      "name": "i茅台",
+      "author": "@hugo",
+      "script": "https://raw.githubusercontent.com/hugoxxxxx/Script/main/maotai.js",
+      "descs_html": [""],
+      "icons": [
+        "https://raw.githubusercontent.com/hugoxxxxx/Script/main/iMaoTai.png",
+        "https://raw.githubusercontent.com/hugoxxxxx/Script/main/iMaoTai.png"
+      ],
+      "keys": [
+        "MT_TOKENS",
+        "MT_PROVINCE",
+        "MT_CITY",
+        "MT_DISTRICT",
+        "MT_ITEM_BLACK",
+        "MT_VERSION",
+        "MT_USERAGENT",
+        "MT_R"
+      ],
+      "settings": [
+        {
+          "id": "MT_TOKENS",
+          "name": "i茅台Token",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 1,
+          "desc": ""
+        },
+        {
+          "id": "MT_PROVINCE",
+          "name": "省份",
+          "val": "",
+          "type": "text",
+          "desc": "XX省 / 直辖市"
+        },
+        {
+          "id": "MT_CITY",
+          "name": "城市",
+          "val": "",
+          "type": "text",
+          "desc": "XX市 / 直辖市"
+        },
+        {
+          "id": "MT_DISTRICT",
+          "name": "区域",
+          "val": "",
+          "type": "text",
+          "desc": "xx区|xx区"
+        
