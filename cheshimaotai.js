@@ -411,26 +411,41 @@ function getShopInfo() {
 
 
 // 获取actParam
-async function getActParam() {
-  let opt = {
-    url: `https://api.fokit.cn/i-maotai`,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `{"itemInfoList":[{"count":1,"itemId":${$.itemId}}],"sessionId":${$.sessionId},"userId":"None","shopId":${$.shopId}}`,
-  }
-  return new Promise(resolve => {
-    $.post(opt, (err, resp, data) => {
-      try {
-        if (data) {
-          data = JSON.parse(data).actParam;
-          // $.log("获取actParam成功", data);
-        }
-      } catch (error) {
-        $.log(error);
-      } finally {
-        resolve(data);
-      }
-    });
-  });
+        async doReserve(itemCode) {
+            try {
+                var params = {
+                    itemInfoList: [{ count: 1, itemId: itemCode }],
+                    sessionId: parseInt(this.sessionId),
+                    userId: this.userId,
+                    shopId: this.shopId
+                }
+                var helper = new DecryptHelper()
+                var actParam = helper.Encrypt(JSON.stringify(params))
+                var options = {
+                    url: `https://app.moutai519.com.cn/xhr/front/mall/reservation/add`,
+                    headers: this.headers,
+                    body: JSON.stringify({
+                        actParam: actParam,
+                        ...params
+                    })
+                }
+                var { body: resp, statusCode } = await service.post(options)
+                if (statusCode === 480) {
+                    // 代表今天预约过或者已过预约时间, 过预约时间直接添加时间限制, 所以默认已预约
+                    todayReserveList.push(itemCode.toString())
+                }
+                var { code, data, message } = JSON.parse(resp)
+                if (code !== 2000) {
+                    Message += `\n${itemMap[itemCode]}\n❌${message}`
+                } else {
+                    Message += `${itemMap[itemCode]}\n✅${data.successDesc}`
+                    todayReserveList.push(itemCode.toString())
+                }
+            } catch (e) {
+                var errMsg = `\n${itemMap[itemCode]}\n❌预约失败: ${e}!`
+                Message += errMsg
+                $.log(errMsg)
+            }
 }
 
 
