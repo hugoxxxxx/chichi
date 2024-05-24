@@ -341,6 +341,9 @@ function Maotai() {
                 $.log(`\n${itemMap[itemCode]}\n❌获取最近店铺失败: ${e}!`)
             }
         }
+        let randomInt = Math.floor(Math.random() * 300);  // 随机等待 0-300 秒
+      console.log(`随机等待 ${randomInt} 秒\n`);
+      await $.wait(randomInt * 1000);
         // 预约 -- success
         async doReserve(itemCode) {
             try {
