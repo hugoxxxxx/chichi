@@ -237,17 +237,30 @@ async function getLatestVersion() {
 
 
 // 获取门店地图
-async function getShopMap() {
-  data = await http_get(`https://static.moutai519.com.cn/mt-backend/xhr/front/mall/resource/get`);
-  if (data && data?.code === 2000) {
-    mapData = await http_get(data.data.mtshops_pc.url);
-    if (mapData) {
-      $.shopMap = mapData;
-    }
-  } else {
-    console.log(`门店地图获取失败\n`);
-  }
-}
+       async getStoreMap() {
+            try {
+                var { body: response } = await service.get(
+                    'https://static.moutai519.com.cn/mt-backend/xhr/front/mall/resource/get'
+                )
+                var { code, data, message } = JSON.parse(response)
+                if (code === 2000) {
+                    var {
+                        mtshops_pc: { url: mapUrl }
+                    } = data
+                    var _json = (await service.get(mapUrl)).body
+                    var arr = []
+                    Object.values(JSON.parse(_json)).map((item) => {
+                        if (item.provinceName === province && item.cityName === city) arr.push(item)
+                    })
+                    this.dictionary = arr
+                    $.log(`\n✅获取到商铺地图数据成功!`)
+                } else {
+                    $.log(`❌获取商铺地图信息失败 ${message ? message : ''}!`)
+                }
+            } catch (err) {
+                $.log(`❌获取商铺地图信息失败: ${err}!`)
+            }
+        }
 
 
 // 获取用户信息
