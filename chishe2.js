@@ -25,7 +25,7 @@ function myFunction() {
 }
 
 // 生成一個介於 1000 毫秒（1 秒）到 5000 毫秒（5 秒）之間的隨機時間
-let randomDelay = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000;
+let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000;
 
 // 使用 setTimeout 在隨機時間後執行 myFunction
 setTimeout(myFunction, randomDelay);
