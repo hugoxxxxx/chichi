@@ -152,7 +152,82 @@ if ($.isNode()) {
   $.sessionId = '', $.shopIds = [], $.itemCodes = [];
   await getShopMap();  // 获取门店地图
   await getSessionId();  // 获取申购列表
-  await getShopInfo();  // 获取门店库存
+  await getShopInfo(class Env {
+    constructor(t, e) {
+        this.name = t;
+        this.http = new this.Http(this);
+        this.logs = [];
+        this.startTime = new Date().getTime();
+        this.log(`🔔${this.name}, 开始!`);
+    }
+
+    log(...t) {
+        t.length > 0 && (this.logs = [...this.logs, ...t]);
+        console.log(t.join(this.logSeparator));
+    }
+
+    logErr(t) {
+        this.log(`❗️${this.name}, 错误!`, t);
+    }
+
+    getStoreInventory(storeId, productId) {
+        const url = `https://api.example.com/stores/${storeId}/products/${productId}/inventory`; // 假设的API URL
+        return this.http.get(url).then(response => {
+            const data = JSON.parse(response.body);
+            if (data.success) {
+                this.log(`门店库存: ${data.inventory}`);
+                return data.inventory;
+            } else {
+                this.log(`❌ 获取库存失败: ${data.message}`);
+                return null;
+            }
+        }).catch(error => {
+            this.logErr(error);
+            return null;
+        });
+    }
+
+    done() {
+        const e = new Date().getTime();
+        const s = (e - this.startTime) / 1e3;
+        this.log(`🔔${this.name}, 结束! 🕛 ${s} 秒`);
+    }
+
+    Http = class {
+        constructor(env) {
+            this.env = env;
+        }
+
+        get(url) {
+            return new Promise((resolve, reject) => {
+                // 假设你有一些库来发起HTTP请求，比如axios或node-fetch
+                fetch(url).then(response => response.json()).then(data => {
+                    resolve({ body: JSON.stringify(data) });
+                }).catch(err => {
+                    reject(err);
+                });
+            });
+        }
+    }
+}
+
+// 使用示例
+const env = new Env('i 茅台');
+const storeId = '海南省三亚市海棠区';
+const productIds = ['10941', '10942'];
+
+productIds.forEach(productId => {
+    env.getStoreInventory(storeId, productId).then(inventory => {
+        if (inventory) {
+            console.log(`产品ID: ${productId}, 库存: ${inventory}`);
+        } else {
+            console.log(`产品ID: ${productId}, 库存信息不可用`);
+        }
+    });
+});
+
+env.done();
+);  // 获取门店库存
   for (let i = 0; i < CookieArr.length; i++) {
     $.userName = '', $.userId = '', $.mobile = '';
     console.log(`\n======== 账号${i + 1} ========\n`);
