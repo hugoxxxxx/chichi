@@ -182,6 +182,8 @@ function Maotai() {
                 throw e
             }
         }
+        //隨時間
+              let randomInt = Math.floor(Math.random() * 300);  // 随机等待 0-300 秒
         // 获取sessionId -- success
         async getSessionId() {
             try {
