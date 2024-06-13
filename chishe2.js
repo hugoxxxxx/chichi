@@ -74,15 +74,15 @@ var yesterdayReserveList = JSON.parse($.getdata(`imaotai_${yesterdayStr}_reserve
         $.log(`\n✅昨日预约记录理成功`)
     }
         // 隨機延遲
-    let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000; // 1 到 200 秒的隨機延遲
-    await new Promise(resolve => setTimeout(resolve, randomDelay));
+   // let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000; // 1 到 200 秒的隨機延遲
+  //  await new Promise(resolve => setTimeout(resolve, randomDelay));
     
     await maotai.initParams() // 初始化参数
     await maotai.getLatestVersion() // 获取最新版本号
     await maotai.getSessionId() // 获取今日sessionId
     await maotai.getStoreMap() // 获取商铺地图信息
         // 隨機延遲
-    randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000; // 1 到 200 秒的隨機延遲
+    randomDelay = Math.floor(Math.random() * (20000 - 1000 + 1)) + 1000; // 1 到 200 秒的隨機延遲
     await new Promise(resolve => setTimeout(resolve, randomDelay));
     
     var isApply = await maotai.isTodayApply() // 今日是否申购过
