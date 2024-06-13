@@ -19,16 +19,6 @@ https://app.moutai519.com.cn/xhr/front/user/info url script-response-body https:
 0,30 9-20 * * * https://raw.githubusercontent.com/hugoxxxxx/Script/main/beifenmaotai.js, tag=i茅台自动预约, img-url=https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/ae/f4/18/aef41811-955e-e6b0-5d23-6763c2eef1ab/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/144x144.png, enabled=true
 ```
 ******************************************/
-//隨機時間執行
-function myFunction() {
-    console.log("This function is executed after a random delay.");
-}
-
-// 生成一個介於 1000 毫秒（1 秒）到 5000 毫秒（5 秒）之間的隨機時間
-let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000;
-
-// 使用 setTimeout 在隨機時間後執行 myFunction
-setTimeout(myFunction, randomDelay);
 //----------------------------------------
 const $ = new Env('i茅台'), service = $.http
 const isRequest = typeof $request !== 'undefined'
@@ -56,6 +46,16 @@ var yesterdayStr = $.time('yyyy_MM_dd', Date.now() - 864e5)
 var todayReserveList = JSON.parse($.getdata(`imaotai_${todayStr}_reservelist`) || '[]') // 今日预约列表(用于判断今日是否已约)
 var yesterdayReserveList = JSON.parse($.getdata(`imaotai_${yesterdayStr}_reservelist`) || '[]') // 昨日预约列表(清理昨日记录)
 // -----------------------------------------------------------------------------------------
+    function fetchData() {
+    console.log("Fetching data after a random delay.");
+    // 你的代碼邏輯
+}
+
+// 生成一個介於 1000 毫秒（1 秒）到 5000 毫秒（5 秒）之間的隨機時間
+let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000;
+
+// 使用 setTimeout 在隨機時間後執行 fetchData
+setTimeout(fetchData, randomDelay);
 !(async () => {
     // 抓包
     if (isRequest) {
