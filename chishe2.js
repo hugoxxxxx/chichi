@@ -244,6 +244,8 @@ function Maotai() {
             }
         }
         // 获取商铺地图信息 -- success
+              let randomInt = Math.floor(Math.random() * 300);  // 随机等待 0-300 秒
+      console.log(`随机等待 ${randomInt} 秒\n`);
         async getStoreMap() {
             try {
                 var { body: response } = await service.get(
