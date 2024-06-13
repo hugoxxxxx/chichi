@@ -183,8 +183,9 @@ function Maotai() {
             }
         }
         //隨時間
-              let randomInt = Math.floor(Math.random() * 300);  // 随机等待 0-300 秒
-        // 获取sessionId -- success
+      let randomInt = Math.floor(Math.random() * 300);  // 随机等待 0-300 秒
+      console.log(`随机等待 ${randomInt} 秒\n`);
+      await $.wait(randomInt * 1000);        // 获取sessionId -- success
         async getSessionId() {
             try {
                 var _ts = new Date().setHours(0, 0, 0, 0)
