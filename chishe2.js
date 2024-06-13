@@ -46,16 +46,6 @@ var yesterdayStr = $.time('yyyy_MM_dd', Date.now() - 864e5)
 var todayReserveList = JSON.parse($.getdata(`imaotai_${todayStr}_reservelist`) || '[]') // 今日预约列表(用于判断今日是否已约)
 var yesterdayReserveList = JSON.parse($.getdata(`imaotai_${yesterdayStr}_reservelist`) || '[]') // 昨日预约列表(清理昨日记录)
 // -----------------------------------------------------------------------------------------
-    function fetchData() {
-    console.log("Fetching data after a random delay.");
-    // 你的代碼邏輯
-}
-
-// 生成一個介於 1000 毫秒（1 秒）到 5000 毫秒（5 秒）之間的隨機時間
-let randomDelay = Math.floor(Math.random() * (200000 - 1000 + 1)) + 1000;
-
-// 使用 setTimeout 在隨機時間後執行 fetchData
-setTimeout(fetchData, randomDelay);
 !(async () => {
     // 抓包
     if (isRequest) {
