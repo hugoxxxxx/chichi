@@ -237,7 +237,7 @@ async function getLatestVersion() {
 
 
 // 获取门店地图
-  async function getShopMap() {
+async function getShopMap() {
   data = await http_get(`https://static.moutai519.com.cn/mt-backend/xhr/front/mall/resource/get`);
   if (data && data?.code === 2000) {
     mapData = await http_get(data.data.mtshops_pc.url);
